@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx-pod-sleep
+  name: nginx-pod-sleep
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - 'sleep 30 '
+    image: nginx:latest
+    name: nginx-pod-sleep
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

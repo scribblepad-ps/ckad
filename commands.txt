@@ -1,0 +1,5 @@
+export dr=--dry-run=client -o yaml
+set -gx  dr --dry-run=client -o yaml
+set -gx sns kc config set-context --current --namespace
+kns=kc config set-context --current --namespace
+alias kns="kc config set-context --current --namespace"
