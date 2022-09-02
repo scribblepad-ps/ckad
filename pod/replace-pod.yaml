@@ -1,0 +1,108 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: b6003ecfe39cfd86a353e29fdb11380a2462fd87194e766d164cfc56c144c42e
+    cni.projectcalico.org/podIP: 10.98.158.56/32
+    cni.projectcalico.org/podIPs: 10.98.158.56/32
+  creationTimestamp: "2022-09-02T13:29:43Z"
+  labels:
+    run: nginx-pod
+  name: nginx-pod
+  namespace: ckad
+  resourceVersion: "1181569"
+  uid: a3ad8fc9-1cf0-4ace-b946-bcf6cb85431b
+spec:
+  containers:
+  - image: nginx:latest
+    imagePullPolicy: Always
+    name: nginx-pod
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-49hwq
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: data-node-01
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-49hwq
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-09-02T13:29:44Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-09-02T14:15:33Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-09-02T14:15:33Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-09-02T13:29:44Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: cri-o://3fca8ccaf2e62f8579e9e4bcc5f8ede47363dcf570123eec3b5dc1529feb984f
+    image: docker.io/library/nginx:stable
+    imageID: docker.io/library/nginx@sha256:cae0639640038c2498fdc166683e3ade877672fa760ba0814ee3c3658edb6228
+    lastState:
+      terminated:
+        containerID: cri-o://df1bd95c134a8118decb42027ef3862910c72edf82850bc43257d4799349f1dc
+        exitCode: 0
+        finishedAt: "2022-09-02T14:21:56Z"
+        reason: Completed
+        startedAt: "2022-09-02T14:15:33Z"
+    name: nginx-pod
+    ready: true
+    restartCount: 14
+    started: true
+    state:
+      running:
+        startedAt: "2022-09-02T14:22:00Z"
+  hostIP: 10.10.0.101
+  phase: Running
+  podIP: 10.98.158.56
+  podIPs:
+  - ip: 10.98.158.56
+  qosClass: BestEffort
+  startTime: "2022-09-02T13:29:44Z"
