@@ -3,6 +3,8 @@
 ### Podman Build
 
    ❯ podman build custom-busybox-entrypoint -t docker.io/scribblepad/custom-busybox-entrypoint
+   
+   
    STEP 1/3: FROM busybox:musl
    STEP 2/3: ENTRYPOINT ["echo","\t\t"]
    --> Using cache 6ab92e230a344dc17e6225cc7a75c738a2e6e452595e04a91a2b714c31f8a1f1
@@ -18,6 +20,8 @@
 ### Podman Push to docker.io
 
    ❯ podman push docker.io/scribblepad/custom-busybox-entrypoint
+   
+   
    Getting image source signatures
    Copying blob d3c2197ed4c4 [--------------------------------------] 0.0b / 0.0b
    Copying config 4aee253257 done  
@@ -45,6 +49,8 @@
 ### Podman run command overriding the ENTRYPOINT and CMD
 
    ❯ podman run --rm --entrypoint '["ip"]' docker.io/scribblepad/custom-busybox-entrypoint 'addr'
+
+
    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1000
       link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
       inet 127.0.0.1/8 scope host lo
