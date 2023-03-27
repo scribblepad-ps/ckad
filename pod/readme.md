@@ -94,3 +94,41 @@ Events:
 		NAME        READY   STATUS    RESTARTS       AGE
 		nginx-pod   1/1     Running   15 (11s ago)   57m
 
+
+## Container ENTRYPOINT and CMD with Kubernetes
+> __Info__  If you do not supply command or args for a Container, the defaults defined in the Docker image are used.
+> __Info__  If you supply only args for a Container, the default Entrypoint defined in the Docker image is run with the args that you supplied.
+> __Info__  If you supply a command for a Container, only the supplied command is used. The default EntryPoint and the default Cmd defined in the Docker image are ignored. Your command is run with the args supplied (or no args if none supplied).
+
+
+### 11. Running pod from image "docker.io/scribblepad/custom-busybox-entrypoint" with default behaviour
+
+		❯ kc run bb-default  --image scribblepad/custom-busybox-entrypoint
+
+		pod/bb-default created
+
+		❯ kc logs bb-default 
+
+						RED
+
+### 12. Running pod from image "docker.io/scribblepad/custom-busybox-entrypoint" with modified args [CMD in docker image]
+
+		❯ kc run bb-args  --image scribblepad/custom-busybox-entrypoint -- BLUE
+		pod/bb-args created
+
+		❯ kc logs bb-args 
+        		         BLUE
+
+
+
+
+### 13. Running pod from image "docker.io/scribblepad/custom-busybox-entrypoint" with modified command [ENTRYPOINT in docker image]
+
+		❯ kc run bb-command --command  --image scribblepad/custom-busybox-entrypoint -- echo YELLOW
+		pod/bb-command created
+
+		❯ kc logs bb-command 
+		YELLOW
+
+
+## PREVILEGED PODS :  Running a pod in a privileged mode means that the pod can access the host’s resources and kernel capabilities.
