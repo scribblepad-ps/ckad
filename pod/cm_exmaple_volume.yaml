@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: bbvolume
+  name: bbvolume
+spec:
+  containers:
+  - command:
+    - "bin/sh"
+    args:
+    - "-c" 
+    - "cat /configvolume/config_a.properties"
+    image: busybox
+    name: demo
+    volumeMounts: 
+    - name: configvolume
+      mountPath: /configvolume
+
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+  volumes:
+    - name: configvolume
+      configMap:
+        name: cm-ckad
+    

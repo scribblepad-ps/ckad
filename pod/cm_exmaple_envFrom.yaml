@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: bbenvfrom
+  name: bbenvfrom
+spec:
+  containers:
+  - command:
+    - "bin/sh"
+    args:
+    - "-c"
+    - "env"
+    image: busybox
+    name: demo
+    envFrom:
+      - configMapRef:
+          name: cm-ckad
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
